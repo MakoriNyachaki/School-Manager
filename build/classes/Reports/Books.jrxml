@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bc65ba2c-7f76-48d4-9264-db678aaaf01d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     book.`libraryNumber` AS book_libraryNumber,
+     book.`ISBN` AS book_ISBN,
+     book.`Title` AS book_Title,
+     book.`Author` AS book_Author,
+     book.`Subject` AS book_Subject,
+     book.`Year` AS Year
+FROM
+     `book` book]]>
+	</queryString>
+	<field name="book_libraryNumber" class="java.lang.String"/>
+	<field name="book_ISBN" class="java.lang.Long"/>
+	<field name="book_Title" class="java.lang.String"/>
+	<field name="book_Author" class="java.lang.String"/>
+	<field name="book_Subject" class="java.lang.String"/>
+	<field name="Year" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="book_Subject">
+		<groupExpression><![CDATA[$F{book_Subject}]]></groupExpression>
+	</group>
+	<group name="book_libraryNumber">
+		<groupExpression><![CDATA[$F{book_libraryNumber}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="41" splitType="Stretch">
+			<staticText>
+				<reportElement x="188" y="0" width="209" height="32" uuid="ea8230be-23e2-4f50-a112-4e4be383d5f7"/>
+				<textElement>
+					<font fontName="Lucida Calligraphy" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LIBRARY STOCK]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="27" splitType="Stretch">
+			<textField pattern="EEE, d MMM yyyy HH:mm:ss Z">
+				<reportElement x="361" y="0" width="194" height="20" uuid="8e253e56-fe02-4023-9c4c-a3aa8fdeab38"/>
+				<textElement>
+					<font fontName="Lucida Calligraphy" size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="307" y="0" width="39" height="20" uuid="6d27476e-40ae-4cb8-bf5a-e3446fe6a565"/>
+				<textElement>
+					<font fontName="Lucida Calligraphy" size="12" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[As at:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="11" width="74" height="20" forecolor="#009999" uuid="055c65f7-68a4-4a1a-9dbb-6743e89ab796"/>
+				<textElement>
+					<font fontName="Lucida Calligraphy" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Library Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="91" y="11" width="63" height="20" forecolor="#009999" uuid="4a59c50d-127b-4237-b127-4a208c781293"/>
+				<textElement>
+					<font fontName="Lucida Calligraphy" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ISBN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="188" y="11" width="56" height="20" forecolor="#009999" uuid="e8ad3df5-d225-48df-aa41-6d294f14832d"/>
+				<textElement>
+					<font fontName="Lucida Calligraphy" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Title]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="267" y="11" width="61" height="20" forecolor="#009999" uuid="2ebf364b-1a21-49da-8dd8-8f438c58a9e5"/>
+				<textElement>
+					<font fontName="Lucida Calligraphy" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Author]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="361" y="11" width="70" height="20" forecolor="#009999" uuid="8193ab47-e8b0-4cd8-b227-015c55823b19"/>
+				<textElement>
+					<font fontName="Lucida Calligraphy" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Subject]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="11" width="70" height="20" forecolor="#009999" uuid="83a845f4-11dc-479a-ba7c-8aedfa922aab"/>
+				<textElement>
+					<font fontName="Lucida Calligraphy" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Year]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="3" y="0" width="71" height="20" uuid="2b546c1d-9928-437c-aa12-9ef4bfc6eeeb"/>
+				<textElement>
+					<font fontName="Lucida Calligraphy"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{book_libraryNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="74" y="0" width="92" height="20" uuid="c4a84645-ac60-4389-a903-a236ef5fdf25"/>
+				<textElement>
+					<font fontName="Lucida Calligraphy"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{book_ISBN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="188" y="0" width="69" height="20" uuid="a54fe1f7-96cd-446f-b1a3-831211d68c9a"/>
+				<textElement>
+					<font fontName="Lucida Calligraphy"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{book_Title}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="267" y="0" width="94" height="20" uuid="edb18b78-6a43-48d0-9545-130e3aa5c103"/>
+				<textElement>
+					<font fontName="Lucida Calligraphy"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{book_Author}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="361" y="0" width="70" height="20" uuid="ec9b9615-f4a0-47b4-9668-c5e55f023e5a"/>
+				<textElement>
+					<font fontName="Lucida Calligraphy"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{book_Subject}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="20" uuid="5552d027-d945-4374-82b8-e15bd8509929"/>
+				<textElement>
+					<font fontName="Lucida Calligraphy"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Year}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="208" y="0" width="80" height="20" uuid="bdd93bdd-e95b-4dd0-93ac-00f2646b039b"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="288" y="0" width="40" height="20" uuid="503c86d4-7583-48e2-b058-2343854ce88a"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
