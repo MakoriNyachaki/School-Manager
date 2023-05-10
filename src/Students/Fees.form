@@ -72,15 +72,13 @@
                   <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="fdate" pref="172" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="transact" max="32767" attributes="0"/>
-                          <Component id="modeofPayment" alignment="1" max="32767" attributes="0"/>
-                          <Component id="paid" alignment="1" max="32767" attributes="0"/>
-                          <Component id="fadm" alignment="1" max="32767" attributes="0"/>
-                          <Component id="fname" alignment="1" max="32767" attributes="0"/>
-                          <Component id="fclass" alignment="1" max="32767" attributes="0"/>
-                          <Component id="fstrm" alignment="0" pref="172" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="transact" max="32767" attributes="0"/>
+                      <Component id="modeofPayment" alignment="1" max="32767" attributes="0"/>
+                      <Component id="paid" alignment="1" max="32767" attributes="0"/>
+                      <Component id="fadm" alignment="1" max="32767" attributes="0"/>
+                      <Component id="fname" alignment="1" max="32767" attributes="0"/>
+                      <Component id="fclass" alignment="1" max="32767" attributes="0"/>
+                      <Component id="fstrm" alignment="0" pref="172" max="32767" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" attributes="0">
@@ -326,6 +324,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Balance"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBalActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>

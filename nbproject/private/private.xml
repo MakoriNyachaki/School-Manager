@@ -3,11 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Today/Java%20projects/School%20Manager/src/Library/Library_Reports.java</file>
-            <file>file:/D:/Today/Java%20projects/School%20Manager/src/Students/Home.java</file>
-            <file>file:/D:/Today/Java%20projects/School%20Manager/src/Students/Registration.java</file>
+            <file>file:/D:/Today/Java%20projects/School%20Manager/src/Exam/Exams_Home.java</file>
             <file>file:/D:/Today/Java%20projects/School%20Manager/src/Students/Fees.java</file>
-            <file>file:/D:/Today/Java%20projects/School%20Manager/src/Reports/Reports.java</file>
+            <file>file:/D:/Today/Java%20projects/School%20Manager/src/Students/Login.java</file>
+            <file>file:/D:/Today/Java%20projects/School%20Manager/src/Exam/Subjects.java</file>
+            <file>file:/D:/Today/Java%20projects/School%20Manager/src/Students/User.java</file>
+            <file>file:/D:/Today/Java%20projects/School%20Manager/src/Exam/Register_Exams.java</file>
+            <file>file:/D:/Today/Java%20projects/School%20Manager/src/Exam/Tests.java</file>
         </group>
     </open-files>
 </project-private>

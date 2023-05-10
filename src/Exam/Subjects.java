@@ -5,21 +5,68 @@
  */
 package Exam;
 
+import Staff.Register;
+import java.awt.HeadlessException;
+import java.sql.*;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
+
+import Students.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Start_a_Way
  */
 public class Subjects extends javax.swing.JFrame {
+    
+    Connection conn=null;
+    ResultSet rs=null;
+    PreparedStatement pstmt=null;
 
     /**
      * Creates new form Subjects
      */
     public Subjects() {
         initComponents();
+        conn = new DbConnect().DbConnect();
     }
 
+    public boolean checkInputs() {
+        if (ucode.getText().isEmpty() || title.getText().isEmpty()) {
+            return false;
+        } else {
+            try {
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+        }
+    }
+    
+    public  void insert(){
+    if (!checkInputs()) {
+        JOptionPane.showMessageDialog(null, "Blank Fields", "Blanks", JOptionPane.ERROR_MESSAGE);        
+    } else {
+        try {
+            String sql = "INSERT INTO `units`(`u_code`, `u_title`) VALUES (?,?)"; 
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, ucode.getText());
+            pstmt.setString(2, title.getText());
+            int i = pstmt.executeUpdate();
+            if (i>0) {
+                JOptionPane.showMessageDialog(null, "Subject Added",
+                        "Saved", JOptionPane.INFORMATION_MESSAGE);
+               
+            }
+            
+        } catch (HeadlessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+                    
+        }
+    }
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -54,6 +101,11 @@ public class Subjects extends javax.swing.JFrame {
 
         save.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         save.setText("Save");
+        save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveActionPerformed(evt);
+            }
+        });
 
         exit.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         exit.setText("Exit");
@@ -65,6 +117,11 @@ public class Subjects extends javax.swing.JFrame {
 
         srch.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         srch.setText("Search");
+        srch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                srchActionPerformed(evt);
+            }
+        });
 
         del.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         del.setText("Delete");
@@ -120,6 +177,9 @@ public class Subjects extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(save)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(srch)
@@ -127,12 +187,8 @@ public class Subjects extends javax.swing.JFrame {
                         .addComponent(upd)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(del)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(exit))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(exit))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,20 +210,20 @@ public class Subjects extends javax.swing.JFrame {
         jInternalFrame1Layout.setHorizontalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 7, Short.MAX_VALUE))
-            .addGroup(jInternalFrame1Layout.createSequentialGroup()
                 .addGap(90, 90, 90)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 30, Short.MAX_VALUE))
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jInternalFrame1Layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addGap(35, 35, 35)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -175,14 +231,14 @@ public class Subjects extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jInternalFrame1)
-                .addGap(1, 1, 1))
+                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jInternalFrame1)
-                .addContainerGap())
+                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         setSize(new java.awt.Dimension(437, 381));
@@ -202,6 +258,33 @@ public class Subjects extends javax.swing.JFrame {
             this.show();
         }
     }//GEN-LAST:event_exitActionPerformed
+
+    private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
+        insert();
+    }//GEN-LAST:event_saveActionPerformed
+
+    private void srchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srchActionPerformed
+        if (!ucode.getText().isEmpty() || ucode.getText()!=null) {
+            try {
+                pstmt = conn.prepareStatement("SELECT * FROM `units` WHERE `u_code` =?");
+                pstmt.setString(1, ucode.getText());
+                
+                rs = pstmt.executeQuery();
+                if(rs.next()){
+                    title.setText(rs.getString("u_title"));
+                    
+                    JOptionPane.showMessageDialog(null, "Subject Found");
+                    
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }else{
+        JOptionPane.showMessageDialog(null, "Code is empty",
+                "Blank", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_srchActionPerformed
 
     /**
      * @param args the command line arguments

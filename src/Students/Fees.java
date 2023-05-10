@@ -174,6 +174,11 @@ public class Fees extends javax.swing.JFrame {
 
         btnBal.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         btnBal.setText("Balance");
+        btnBal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBalActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel3.setText("Stream");
@@ -218,14 +223,13 @@ public class Fees extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(fdate, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(transact)
-                        .addComponent(modeofPayment, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(paid, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(fadm, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(fname, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(fclass, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(fstrm, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)))
+                    .addComponent(transact)
+                    .addComponent(modeofPayment, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(paid, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(fadm, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(fname, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(fclass, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(fstrm, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(51, 51, 51)
@@ -365,6 +369,10 @@ public class Fees extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_fsrchActionPerformed
+
+    private void btnBalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBalActionPerformed
 
     /**
      * @param args the command line arguments

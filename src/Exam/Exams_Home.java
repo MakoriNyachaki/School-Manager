@@ -148,7 +148,7 @@ public class Exams_Home extends javax.swing.JFrame {
                 .addGap(10, 10, 10))
         );
 
-        setSize(new java.awt.Dimension(805, 238));
+        setSize(new java.awt.Dimension(805, 270));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

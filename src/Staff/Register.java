@@ -9,8 +9,7 @@ import Students.*;
 import java.awt.HeadlessException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.logging.*;
 import javax.swing.JOptionPane;
 
 /**
@@ -157,6 +156,11 @@ public  void insert(){
 
         del.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         del.setText("Delete");
+        del.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delActionPerformed(evt);
+            }
+        });
 
         srch.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         srch.setText("Search");
@@ -508,7 +512,7 @@ public  void insert(){
                 .addGap(269, 269, 269)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 692, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -520,7 +524,7 @@ public  void insert(){
                 .addGap(35, 35, 35))
         );
 
-        setSize(new java.awt.Dimension(708, 556));
+        setSize(new java.awt.Dimension(758, 594));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -586,6 +590,10 @@ public  void insert(){
                 "Blank", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_srchActionPerformed
+
+    private void delActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_delActionPerformed
 
     /**
      * @param args the command line arguments

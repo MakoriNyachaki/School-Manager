@@ -483,6 +483,11 @@ public class Tests extends javax.swing.JFrame {
         updateRecord.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         updateRecord.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/edit-validated-icon24.png"))); // NOI18N
         updateRecord.setText("Update");
+        updateRecord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateRecordActionPerformed(evt);
+            }
+        });
 
         srchRecord.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         srchRecord.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Knob-Search-icon24.png"))); // NOI18N
@@ -496,6 +501,11 @@ public class Tests extends javax.swing.JFrame {
         deleteRecord.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         deleteRecord.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Recycle-Bin-empty-icon24.png"))); // NOI18N
         deleteRecord.setText("Delete");
+        deleteRecord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteRecordActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel6.setText("Term");
@@ -512,7 +522,7 @@ public class Tests extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(46, 60, Short.MAX_VALUE)
                 .addComponent(srchRecord)
                 .addGap(18, 18, 18)
                 .addComponent(updateRecord)
@@ -579,7 +589,7 @@ public class Tests extends javax.swing.JFrame {
             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        setSize(new java.awt.Dimension(682, 623));
+        setSize(new java.awt.Dimension(709, 682));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -703,6 +713,14 @@ public class Tests extends javax.swing.JFrame {
             adm.setBackground(Color.red);
         }
     }//GEN-LAST:event_srchRecordActionPerformed
+
+    private void updateRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateRecordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_updateRecordActionPerformed
+
+    private void deleteRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteRecordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteRecordActionPerformed
 
     /**
      * @param args the command line arguments

@@ -6,6 +6,7 @@
 package Students;
 
 import java.awt.Color;
+import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 import java.sql.*;
 import java.text.SimpleDateFormat;
@@ -384,10 +385,12 @@ public class User extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(463, 487));
+        setSize(new java.awt.Dimension(463, 547));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -413,7 +416,36 @@ public class User extends javax.swing.JFrame {
     }//GEN-LAST:event_saveActionPerformed
 
     private void srchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srchActionPerformed
-        // TODO add your handling code here:
+        String sql = "SELECT `staffNo`, `Email`, `Phone` FROM `user` WHERE `staffNo` =?";
+        if (!sno.getText().isEmpty()) {
+            try {
+                pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, sno.getText());
+                rs = pstmt.executeQuery();
+
+                if (rs.next()) {
+                    uemail.setText(rs.getString("Email"));
+                    uphone.setText(rs.getString("Phone"));
+
+                    JOptionPane.showMessageDialog(null, "Our Staff",
+                            "Found", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Not Our Staff",
+                            "Not Found/Invalid", JOptionPane.ERROR_MESSAGE);
+                    sno.requestFocus();
+                    sno.setBackground(Color.orange);
+                }
+
+            } catch (HeadlessException | SQLException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Blank Staff Number, "
+                    + "Invalid Entry", "Blanks", JOptionPane.ERROR_MESSAGE);
+            sno.setBackground(Color.red);
+            sno.requestFocus();
+        }                                           
+
     }//GEN-LAST:event_srchActionPerformed
 
     /**

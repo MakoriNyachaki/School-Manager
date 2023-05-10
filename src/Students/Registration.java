@@ -204,7 +204,7 @@ public class Registration extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel5.setBorder(new javax.swing.border.SoftBevelBorder(0, new java.awt.Color(0, 153, 153), new java.awt.Color(0, 153, 153), new java.awt.Color(0, 153, 153), new java.awt.Color(0, 153, 153)));
+        jPanel5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 153, 153), new java.awt.Color(0, 153, 153), new java.awt.Color(0, 153, 153), new java.awt.Color(0, 153, 153)));
 
         prev.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         prev.setText("Previous");
@@ -247,7 +247,7 @@ public class Registration extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jLabel1.setText("STUDENT REGISTRATION");
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(0, new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102)), "Student Details", 0, 2, new java.awt.Font("Calibri", 3, 12))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102)), "Student Details", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Calibri", 3, 12))); // NOI18N
 
         ssrch.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         ssrch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Knob-Search-icon24.png"))); // NOI18N
@@ -459,6 +459,11 @@ public class Registration extends javax.swing.JFrame {
         supd.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         supd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/edit-validated-icon24.png"))); // NOI18N
         supd.setText("Update");
+        supd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                supdActionPerformed(evt);
+            }
+        });
 
         photo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         photo.setText("Student passport");
@@ -508,7 +513,7 @@ public class Registration extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(0, new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102)), "Parent Registration", 0, 2, new java.awt.Font("Calibri", 3, 12))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102), new java.awt.Color(102, 102, 102)), "Parent Registration", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Calibri", 3, 12))); // NOI18N
 
         jLabel20.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel20.setText("Parent ID No.");
@@ -911,6 +916,10 @@ public class Registration extends javax.swing.JFrame {
             Logger.getLogger(Registration.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_prevActionPerformed
+
+    private void supdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_supdActionPerformed
 
     /**
      * @param args the command line arguments
