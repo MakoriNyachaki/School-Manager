@@ -10,7 +10,6 @@ package Library;
  * @author Start_a_Way
  */
 import Students.DbConnect;
-import Library.Return;
 import java.sql.*;
 
 public class methods {
@@ -28,7 +27,7 @@ public class methods {
         try {
             pstmt = conn.prepareStatement(sql);
            
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
     }
     

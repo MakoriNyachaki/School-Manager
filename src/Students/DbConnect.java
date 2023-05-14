@@ -17,9 +17,9 @@ public class DbConnect {
 
     Connection conn;
     public final String DbName = "sms";
-    public final String Name = "Makotech";
+    public final String Name = "admin";
     public final String url = "jdbc:mysql://localhost:3306/";
-    public final String pass = "makotech61";
+    public final String pass = "admin";
 
     public Connection DbConnect() {
         try {

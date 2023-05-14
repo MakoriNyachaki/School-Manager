@@ -32,6 +32,16 @@ public class Subjects extends javax.swing.JFrame {
         initComponents();
         conn = new DbConnect().DbConnect();
     }
+    
+    public void clfs()
+    {
+        if ((!ucode.getText().isEmpty() || ucode.getText() != null)
+                && (!title.getText().isEmpty() || title.getText() != null))
+        {
+            ucode.setText(null);
+            title.setText(null);
+        }
+    }
 
     public boolean checkInputs() {
         if (ucode.getText().isEmpty() || title.getText().isEmpty()) {
@@ -47,7 +57,8 @@ public class Subjects extends javax.swing.JFrame {
     
     public  void insert(){
     if (!checkInputs()) {
-        JOptionPane.showMessageDialog(null, "Blank Fields", "Blanks", JOptionPane.ERROR_MESSAGE);        
+        JOptionPane.showMessageDialog(null, "Blank Fields", "Blanks",
+                JOptionPane.ERROR_MESSAGE);        
     } else {
         try {
             String sql = "INSERT INTO `units`(`u_code`, `u_title`) VALUES (?,?)"; 
@@ -58,6 +69,7 @@ public class Subjects extends javax.swing.JFrame {
             if (i>0) {
                 JOptionPane.showMessageDialog(null, "Subject Added",
                         "Saved", JOptionPane.INFORMATION_MESSAGE);
+                clfs();
                
             }
             
@@ -246,9 +258,26 @@ public class Subjects extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void updActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updActionPerformed
-        // TODO add your handling code here:
+        if(!ucode.getText().isEmpty() || ucode.getText() != null)
+        {
+            try {
+                pstmt = conn.prepareStatement("UPDATE `units` SET `u_code`="
+                        + "'"+ucode.getText()+"',`u_title`='"+title.getText()+"'"
+                                + "WHERE `u_code`='"+ucode.getText()+"'");
+                pstmt.execute();
+                JOptionPane.showMessageDialog(null, "Update successful!");
+                clfs();
+            } catch (SQLException ex) {
+                Logger.getLogger(Subjects.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Unit Code empty. No record found!",
+            "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_updActionPerformed
-
+;
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         this.hide();
         int a = JOptionPane.showConfirmDialog(null, "Do You Want to Exit?", "Exit", JOptionPane.YES_OPTION);
