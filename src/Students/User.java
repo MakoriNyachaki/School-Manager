@@ -395,7 +395,32 @@ public class User extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void updActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updActionPerformed
-        
+        if(sno.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Staff number field is empty!",
+                    "Empty field", JOptionPane.ERROR_MESSAGE);
+        }else{
+            try {
+                pstmt = conn.prepareStatement("UPDATE `user` SET `staffNo`=?,`Email`=?,"
+                        + "`Phone`=?,`Password`='[value-7]' WHERE staffNo=?");
+                
+                pstmt.setString(1, sno.getText());
+                pstmt.setString(2, uemail.getText());
+                pstmt.setString(3, uphone.getText());
+                
+                pstmt.executeUpdate();
+                
+                if(pstmt.executeUpdate() > 0){
+                    JOptionPane.showMessageDialog(null, "Record updated",
+                            "success", JOptionPane.INFORMATION_MESSAGE);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Staff number invalid",
+                            "Invalid staff number", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
     }//GEN-LAST:event_updActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed

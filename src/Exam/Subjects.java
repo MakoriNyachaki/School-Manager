@@ -137,6 +137,11 @@ public class Subjects extends javax.swing.JFrame {
 
         del.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         del.setText("Delete");
+        del.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Code");
@@ -235,7 +240,7 @@ public class Subjects extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -258,7 +263,7 @@ public class Subjects extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void updActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updActionPerformed
-        if(!ucode.getText().isEmpty() || ucode.getText() != null)
+        if(checkInputs())
         {
             try {
                 pstmt = conn.prepareStatement("UPDATE `units` SET `u_code`="
@@ -273,7 +278,7 @@ public class Subjects extends javax.swing.JFrame {
         }
         else
         {
-            JOptionPane.showMessageDialog(null, "Unit Code empty. No record found!",
+            JOptionPane.showMessageDialog(null, "Input fields empty!",
             "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_updActionPerformed
@@ -293,7 +298,7 @@ public class Subjects extends javax.swing.JFrame {
     }//GEN-LAST:event_saveActionPerformed
 
     private void srchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srchActionPerformed
-        if (!ucode.getText().isEmpty() || ucode.getText()!=null) {
+        if (!ucode.getText().isEmpty()) {
             try {
                 pstmt = conn.prepareStatement("SELECT * FROM `units` WHERE `u_code` =?");
                 pstmt.setString(1, ucode.getText());
@@ -302,8 +307,11 @@ public class Subjects extends javax.swing.JFrame {
                 if(rs.next()){
                     title.setText(rs.getString("u_title"));
                     
-                    JOptionPane.showMessageDialog(null, "Subject Found");
-                    
+                    JOptionPane.showMessageDialog(null, "Subject Found");                    
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Unit code invalid",
+                            "Invalid unit code", JOptionPane.ERROR_MESSAGE);
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
@@ -311,9 +319,40 @@ public class Subjects extends javax.swing.JFrame {
             
         }else{
         JOptionPane.showMessageDialog(null, "Code is empty",
-                "Blank", JOptionPane.ERROR_MESSAGE);
+                "Empty field", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_srchActionPerformed
+
+    private void delActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delActionPerformed
+        if (!ucode.getText().isEmpty()){
+            try {
+               int d = JOptionPane.showConfirmDialog(null, "Do you want to delete?",
+                       "Delete?", JOptionPane.YES_NO_OPTION);
+               
+               if (d == JOptionPane.YES_OPTION){
+                   
+                   pstmt = conn.prepareStatement("DELETE FROM `units`"
+                           + "WHERE u_code = '"+ucode.getText()+"'");                
+                   pstmt.executeUpdate();
+                   
+                   if(pstmt.executeUpdate() > 0){
+                       JOptionPane.showMessageDialog(null, "Record deleted successfully");
+                       clfs();
+                       }
+                   else{
+                       JOptionPane.showMessageDialog(null, "Record not found",
+                               "Invalid unit code", JOptionPane.ERROR_MESSAGE);
+                   }
+                   }                
+            } catch (SQLException ex) {
+                Logger.getLogger(Subjects.class.getName()).log(Level.SEVERE, null, ex);
+            }            
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Unit code field empty",
+                    "Empty field", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_delActionPerformed
 
     /**
      * @param args the command line arguments

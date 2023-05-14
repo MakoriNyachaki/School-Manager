@@ -44,6 +44,29 @@ public boolean checkInputs() {
             }
         }
     }
+
+public void clfs(){
+    if(!sno.getText().isEmpty()){
+        sno.setText(null);
+        sname.setText(null);
+        gender.setSelectedIndex(-1);
+        Dept.setSelectedIndex(-1);
+        jgroup.setSelectedIndex(-1);
+        phone.setText(null);
+        email.setText(null);
+        major.setText(null);
+        role.setSelectedIndex(-1);
+        add.setText(null);
+        pcode.setText(null);
+        town.setText(null);
+        dob.setDate(null);
+        dor.setDate(null);
+    }
+    else{
+        JOptionPane.showMessageDialog(null, "Staff number field empty!");
+    }
+
+}
 public  void insert(){
     if (!checkInputs()) {
         JOptionPane.showMessageDialog(null, "Blank Fields", "Blanks", JOptionPane.ERROR_MESSAGE);
@@ -537,12 +560,36 @@ public  void insert(){
     }//GEN-LAST:event_majorActionPerformed
 
     private void updActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updActionPerformed
-        // TODO add your handling code here:
+        try {
+            pstmt = conn.prepareStatement("UPDATE `staff` SET "
+                    + "`staffNo`='"+sno.getText()+"',"
+                    + "`Name`='"+sname.getText()+"',"
+                    + "`Gender`='"+gender.getSelectedItem()+"',"
+                    + "`DOB`='"+dob.getDate()+"',"
+                    + "`Category`='"+category.getSelectedItem()+"',"
+                    + "`jGroup`='"+jgroup.getSelectedItem()+"',"
+                    + "`Department`='"+Dept.getSelectedItem()+"',"
+                    + "`Major`='"+major.getText()+"',"
+                    + "`Role`='"+role.getSelectedItem()+"',"
+                    + "`Phone`='"+phone.getText()+"',"
+                    + "`Email`='"+email.getText()+"',"
+                    + "`Address`='"+add.getText()+"',"
+                    + "`pCode`='"+pcode.getText()+"',"
+                    + "`Town`='"+town.getText()+"',"
+                    + "`DOR`='"+dor.getDate()+"'"
+                    + "WHERE `staffNo`='"+sno.getText()+"'");
+            
+            pstmt.execute();
+            JOptionPane.showMessageDialog(null, "Update successful");
+        } catch (SQLException ex) {
+            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_updActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         this.hide();
-        int a = JOptionPane.showConfirmDialog(null, "Do you want to exit window?", "Close", JOptionPane.YES_NO_OPTION);
+        int a = JOptionPane.showConfirmDialog(null, "Do you want to exit window?",
+                "Close", JOptionPane.YES_NO_OPTION);
         if (a==JOptionPane.YES_OPTION) {
             System.exit(0);
             
@@ -581,18 +628,45 @@ public  void insert(){
                     JOptionPane.showMessageDialog(null, "Search successful, Staff member found");
                     
                 }
+                else{
+                    JOptionPane.showMessageDialog(null, "Invalid staff number!",
+                            "Invalid staff number", JOptionPane.ERROR_MESSAGE);
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         }else{
         JOptionPane.showMessageDialog(null, "Staff number is empty",
-                "Blank", JOptionPane.ERROR_MESSAGE);
+                "Empty field", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_srchActionPerformed
 
     private void delActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delActionPerformed
-        // TODO add your handling code here:
+        if(!sno.getText().isEmpty()){
+            try {
+                int dele = JOptionPane.showConfirmDialog(null, "Do you want to delete?",
+                        "Delete?", JOptionPane.YES_NO_OPTION);
+                if(dele == JOptionPane.YES_OPTION){
+                    pstmt = conn.prepareStatement("DELETE FROM `staff`"
+                            + "WHERE staffNo = '"+sno.getText()+"'");
+                    
+                    pstmt.executeUpdate();
+                    
+                    if(pstmt.executeUpdate() > 0)
+                    {
+                        JOptionPane.showConfirmDialog(null, "Record deleted successfully");
+                        clfs();
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Invalid staff number!",
+                                "Invalid staff number", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_delActionPerformed
 
     /**
