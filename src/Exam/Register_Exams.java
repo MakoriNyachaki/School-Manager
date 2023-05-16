@@ -9,6 +9,8 @@ import Students.*;
 import java.awt.Color;
 import java.awt.HeadlessException;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -567,7 +569,33 @@ public class Register_Exams extends javax.swing.JFrame {
     }//GEN-LAST:event_srchActionPerformed
 
     private void updActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updActionPerformed
-        // TODO add your handling code here:
+        try {
+            pstmt = conn.prepareStatement("UPDATE `examregister` SET "
+                    + "`admNo`='"+adm.getText()+"',`Name`='"+name.getText()+"',"
+                    + "`Form`='"+frm.getText()+"',`Stream`='"+strm.getText()+"',"
+                    + "`numberofUnits`='"+units.getSelectedItem()+"',`Eng`='"+eng.getText()+"',"
+                    + "`Swa`='"+swa.getText()+"',`Mat`='"+mat.getText()+"',"
+                    + "`Bio`='"+bio.getText()+"',`Che`='"+che.getText()+"',"
+                    + "`Phy`='"+phy.getText()+"',`His`='"+his.getText()+"',"
+                    + "`Cre`='"+cre.getText()+"',`Geo`='"+geo.getText()+"',"
+                    + "`GroupIV`='"+opt4.getText()+"',`GroupV`='"+opt5.getText()+"' "
+                    + "WHERE `admNo`='"+adm.getText()+"'");
+            
+            pstmt.executeUpdate();
+            
+            if(pstmt.executeUpdate() >0)
+            {
+                JOptionPane.showMessageDialog(null, "Update successful!", "Update", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Update failed!", "Fail", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Register_Exams.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
     }//GEN-LAST:event_updActionPerformed
 
     /**

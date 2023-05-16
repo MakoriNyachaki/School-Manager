@@ -11,6 +11,7 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.logging.*;
 import javax.swing.JOptionPane;
+import java.util.Date;
 
 /**
  *
@@ -61,6 +62,7 @@ public void clfs(){
         town.setText(null);
         dob.setDate(null);
         dor.setDate(null);
+        category.setSelectedIndex(-1);
     }
     else{
         JOptionPane.showMessageDialog(null, "Staff number field empty!");
@@ -560,27 +562,34 @@ public  void insert(){
     }//GEN-LAST:event_majorActionPerformed
 
     private void updActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updActionPerformed
+       Date date = dob.getDate();
+       SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+       String d_birth = format.format(date);
+       
+       Date data = dob.getDate();
+       String d_reg = format.format(data);
         try {
             pstmt = conn.prepareStatement("UPDATE `staff` SET "
-                    + "`staffNo`='"+sno.getText()+"',"
-                    + "`Name`='"+sname.getText()+"',"
-                    + "`Gender`='"+gender.getSelectedItem()+"',"
-                    + "`DOB`='"+dob.getDate()+"',"
+                    + "`staffNo`='"+sno.getText()+"',`Name`='"+sname.getText()+"',"
+                    + "`Gender`='"+gender.getSelectedItem()+"',`DOB`='"+d_birth+"',"
                     + "`Category`='"+category.getSelectedItem()+"',"
                     + "`jGroup`='"+jgroup.getSelectedItem()+"',"
                     + "`Department`='"+Dept.getSelectedItem()+"',"
-                    + "`Major`='"+major.getText()+"',"
-                    + "`Role`='"+role.getSelectedItem()+"',"
-                    + "`Phone`='"+phone.getText()+"',"
-                    + "`Email`='"+email.getText()+"',"
-                    + "`Address`='"+add.getText()+"',"
-                    + "`pCode`='"+pcode.getText()+"',"
-                    + "`Town`='"+town.getText()+"',"
-                    + "`DOR`='"+dor.getDate()+"'"
-                    + "WHERE `staffNo`='"+sno.getText()+"'");
+                    + "`Major`='"+major.getText()+"',`Role`='"+role.getSelectedItem()+"',"
+                    + "`Phone`='"+phone.getText()+"',`Email`='"+email.getText()+"',"
+                    + "`Address`='"+add.getText()+"',`pCode`='"+pcode.getText()+"',"
+                    + "`Town`='"+town.getText()+"',`DOR`='"+d_reg+"' WHERE `staffNo`='"+sno.getText()+"'");
             
-            pstmt.execute();
-            JOptionPane.showMessageDialog(null, "Update successful");
+            pstmt.executeUpdate();
+            if (pstmt.executeUpdate() > 0)
+            {
+                JOptionPane.showMessageDialog(null, "Update successful");
+                clfs();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Update failed!", "Fail", JOptionPane.ERROR_MESSAGE);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
         }
