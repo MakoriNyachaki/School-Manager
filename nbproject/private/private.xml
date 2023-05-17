@@ -4,8 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Lenovo/Desktop/School-Manager/src/Students/User.java</file>
+            <file>file:/C:/Users/Lenovo/Desktop/School-Manager/src/Library/Books.java</file>
+            <file>file:/C:/Users/Lenovo/Desktop/School-Manager/src/Library/Search_Book.java</file>
+            <file>file:/C:/Users/Lenovo/Desktop/School-Manager/src/Library/Issue.java</file>
             <file>file:/C:/Users/Lenovo/Desktop/School-Manager/src/Students/Login.java</file>
             <file>file:/C:/Users/Lenovo/Desktop/School-Manager/src/Exam/Subjects.java</file>
+            <file>file:/C:/Users/Lenovo/Desktop/School-Manager/src/Library/Return.java</file>
+            <file>file:/C:/Users/Lenovo/Desktop/School-Manager/src/Students/Registration.java</file>
             <file>file:/C:/Users/Lenovo/Desktop/School-Manager/src/Exam/Register_Exams.java</file>
             <file>file:/C:/Users/Lenovo/Desktop/School-Manager/src/Staff/Register.java</file>
         </group>

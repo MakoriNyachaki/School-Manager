@@ -554,12 +554,22 @@ public class Registration extends javax.swing.JFrame {
         psrch.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         psrch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Knob-Search-icon24.png"))); // NOI18N
         psrch.setText("Search Parent");
+        psrch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                psrchActionPerformed(evt);
+            }
+        });
 
         phone.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
 
         pupd.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         pupd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/edit-validated-icon24.png"))); // NOI18N
         pupd.setText("Update Parent");
+        pupd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pupdActionPerformed(evt);
+            }
+        });
 
         pgender.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         pgender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Female", "Male" }));
@@ -918,8 +928,86 @@ public class Registration extends javax.swing.JFrame {
     }//GEN-LAST:event_prevActionPerformed
 
     private void supdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supdActionPerformed
-        // TODO add your handling code here:
+        if (studentInputs())
+        {
+            try {
+            pstmt = conn.prepareStatement("UPDATE `student` SET `"
+                    + "admNo`='"+admno.getText()+"',"
+                    + "`indexNo`='"+kcpeindex.getText()+"',"
+                    + "`idNo`='"+pid.getText()+"',"
+                    + "`sName`='"+surname.getText()+"',"
+                    + "`otherName`='"+oname.getText()+"',"
+                    + "`Gender`='"+sgender.getSelectedItem()+"',"
+                    + "`DOB`='"+(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(dob.getDate()))+"',"
+                    + "`Form`='"+frm.getSelectedItem()+"',"
+                    + "`Stream`='"+strm.getSelectedItem()+"',"
+                    + "`Kcpe`='"+cpemrks.getText()+"',"
+                    + "`targetKcse`='"+kscetar.getText()+"',"
+                    + "`Career`='"+career.getText()+"',`"
+                    + "DOA`='"+(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(doa.getDate()))+"' "
+                    + "WHERE admNo`='"+admno.getText()+"'");
+            
+            pstmt.executeUpdate();
+            
+            if (pstmt.executeUpdate() > 0)
+            {
+                JOptionPane.showMessageDialog(null, "Student update successful",
+                        "Updated", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } 
+            catch (SQLException ex) {
+            Logger.getLogger(Registration.class.getName()).log(Level.SEVERE, null, ex);
+            }
+              try {
+                pstmt = conn.prepareStatement("UPDATE `student` SET `Photo`=? WHERE `admNo`='"+admno.getText()+"'");
+                try {
+                InputStream is = new FileInputStream(new File(ImagePath));
+                pstmt.setBlob(1, is);
+                
+                pstmt.executeUpdate();
+            } catch (FileNotFoundException | SQLException e) {
+            }                
+            } catch (SQLException ex) {
+                Logger.getLogger(Registration.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else
+                {
+                    JOptionPane.showMessageDialog(null, "Fields are empty, cannot update",
+                            "Empty fields", JOptionPane.ERROR_MESSAGE);
+                }            
+            
     }//GEN-LAST:event_supdActionPerformed
+
+    private void psrchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_psrchActionPerformed
+        
+    }//GEN-LAST:event_psrchActionPerformed
+
+    private void pupdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pupdActionPerformed
+        try {
+            pstmt = conn.prepareStatement("UPDATE `parent` SET "
+                    + "`idNo`='"+pid.getText()+"',"
+                    + "`parentName`='"+pname.getText()+"',"
+                    + "`parentGender`='"+pgender.getSelectedItem()+"',"
+                    + "`parentPhone`='"+phone.getText()+"',"
+                    + "`parentEmail`='"+email.getText()+"',"
+                    + "`parentAddress`='"+address.getText()+"',"
+                    + "`postalCode`='"+pcode.getText()+"',"
+                    + "`Town`='"+town.getText()+"',"
+                    + "`parentDate`='"+(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(doa.getDate()))+"' "
+                    + "WHERE `idNo`='"+pid.getText()+"'");
+            
+            pstmt.executeQuery();
+            
+            if(pstmt.executeUpdate() > 0)
+            {
+                JOptionPane.showMessageDialog(null, "Parent update successful!",
+                        "Update", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Registration.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_pupdActionPerformed
 
     /**
      * @param args the command line arguments

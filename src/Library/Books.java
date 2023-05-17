@@ -432,7 +432,46 @@ public class Books extends javax.swing.JFrame {
     }//GEN-LAST:event_exitActionPerformed
 
     private void updActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updActionPerformed
-        // TODO add your handling code here:
+        if (!checkInputs())
+        {
+            JOptionPane.showMessageDialog(null, "Blank Fields, cannot update!",
+                    "Empty fields", JOptionPane.ERROR_MESSAGE);
+        }
+        else
+        {
+            try {
+            pstmt = conn.prepareStatement("UPDATE `book` SET "
+                    + "`libraryNumber`='"+lno.getText()+"',"
+                    + "`ISBN`='"+isbn.getText()+"',"
+                    + "`Title`='"+title.getText()+"',"
+                    + "`Author`='"+author.getText()+"',"
+                    + "`Genre`='"+genre.getSelectedItem()+"',"
+                    + "`Pages`='"+pg.getText()+"',"
+                    + "`Subject`='"+subj.getSelectedItem()+"',"
+                    + "`Volume`='"+vol.getText()+"',"
+                    + "`Edition`='"+edition.getText()+"',"
+                    + "`Year`='"+yr.getText()+"',"
+                    + "`Publisher`='"+pub1.getText()+"',"
+                    + "`Price`='"+price.getText()+"',"
+                    + "`regDate`='"+(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(jdate.getDate()))+"'"
+                    + " WHERE `libraryNumber`='"+lno.getText()+"'");
+            
+            pstmt.executeUpdate();
+            
+            if (pstmt.executeUpdate() > 0)
+            {
+                JOptionPane.showMessageDialog(null, "Book updated successfully!",
+                        "Updated", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Record up to date!",
+                        "Up to date", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Books.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
     }//GEN-LAST:event_updActionPerformed
 
     private void pgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pgActionPerformed
@@ -446,7 +485,7 @@ public class Books extends javax.swing.JFrame {
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         if (!checkInputs()) {
             JOptionPane.showMessageDialog(null, "Some required fields are empty. Non-Required "
-                    + "fiels are Edition and Volume", "Blank", JOptionPane.ERROR_MESSAGE);
+                    + "fiels are Edition and Volume", "Empty Fields", JOptionPane.ERROR_MESSAGE);
         } else {
             insert();
         }

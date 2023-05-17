@@ -575,7 +575,45 @@ public class Issue extends javax.swing.JFrame {
     }//GEN-LAST:event_srchBookActionPerformed
 
     private void srchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srchActionPerformed
-        // TODO add your handling code here:
+        if ((!adm.getText().isEmpty() || adm.getText() != null)
+                || (!lno.getText().isEmpty() || lno.getText() != null)) {
+            try {
+                pstmt = conn.prepareStatement("SELECT * FROM `borrow_book` "
+                        + "WHERE ((`admNo` = ?) OR (`libraryNumber` = ?))");
+                
+                if (adm.getText() != null)
+                {
+                    pstmt.setString(1, adm.getText());
+                }
+                else if(lno.getText() != null)
+                {
+                    pstmt.setString(2, lno.getText());
+                }
+                
+                
+                rs = pstmt.executeQuery();
+                if(rs.next()){
+                    sname.setText(rs.getString("otherName"));
+                    sclass.setText(rs.getString("Form"));
+                    strm.setText(rs.getString("Stream"));
+                    isbn.setText(rs.getString("ISBN"));
+                    title.setText(rs.getString("Title"));
+                    yr.setText(rs.getString("Year"));
+                    pub.setText(rs.getString("Publisher"));
+                    
+                    pstmt.close();
+                    rs.close();
+                    
+                    JOptionPane.showMessageDialog(null, "Search successful, Record found!");
+                    
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Blank Library Number or Admission number", 
+                    "Empty fields", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_srchActionPerformed
 
     /**
