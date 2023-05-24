@@ -167,6 +167,11 @@ public  void insert(){
 
         next.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         next.setText("Next");
+        next.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextActionPerformed(evt);
+            }
+        });
 
         first.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         first.setText("First");
@@ -197,6 +202,11 @@ public  void insert(){
 
         last.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         last.setText("Last");
+        last.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lastActionPerformed(evt);
+            }
+        });
 
         prev.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         prev.setText("Previous");
@@ -677,6 +687,62 @@ public  void insert(){
             }
         }
     }//GEN-LAST:event_delActionPerformed
+
+    private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
+        try {
+            // TODO add your handling code here:
+            pstmt = (PreparedStatement) conn.createStatement( rs.TYPE_SCROLL_INSENSITIVE, rs.CONCUR_UPDATABLE );
+           if(rs.next())
+           {
+                sno.setText(rs.getString("staffNo"));
+                sname.setText(rs.getString("Name"));
+                gender.setSelectedItem(rs.getString("Gender"));
+                dob.setDate(rs.getDate("DOB"));
+                category.setSelectedItem(rs.getString("Category"));
+                jgroup.setSelectedItem(rs.getString("jGroup"));
+                Dept.setSelectedItem(rs.getString("Department"));
+                major.setText(rs.getString("Major"));
+                role.setSelectedItem(rs.getString("Role"));
+                phone.setText(rs.getString("Phone"));
+                email.setText(rs.getString("Email"));
+                add.setText(rs.getString("Address"));
+                pcode.setText(rs.getString("pCode")); 
+                town.setText(rs.getString("Town"));
+                dor.setDate(rs.getDate("DOR"));
+           }
+           else
+           {
+               rs.previous();
+               JOptionPane.showMessageDialog(this, "End of records");
+           }
+        } catch (SQLException ex) {
+            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_nextActionPerformed
+
+    private void lastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastActionPerformed
+        // TODO add your handling code here:
+        try {
+            rs.last();
+            sno.setText(rs.getString("staffNo"));
+            sname.setText(rs.getString("Name"));
+            gender.setSelectedItem(rs.getString("Gender"));
+            dob.setDate(rs.getDate("DOB"));
+            category.setSelectedItem(rs.getString("Category"));
+            jgroup.setSelectedItem(rs.getString("jGroup"));
+            Dept.setSelectedItem(rs.getString("Department"));
+            major.setText(rs.getString("Major"));
+            role.setSelectedItem(rs.getString("Role"));
+            phone.setText(rs.getString("Phone"));
+            email.setText(rs.getString("Email"));
+            add.setText(rs.getString("Address"));
+            pcode.setText(rs.getString("pCode")); 
+            town.setText(rs.getString("Town"));
+            dor.setDate(rs.getDate("DOR"));
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_lastActionPerformed
 
     /**
      * @param args the command line arguments

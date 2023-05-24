@@ -129,6 +129,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Next"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nextActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="first">
           <Properties>
@@ -178,6 +181,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Last"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lastActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="prev">
           <Properties>
