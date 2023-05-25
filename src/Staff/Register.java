@@ -18,9 +18,9 @@ import java.util.Date;
  * @author Start_a_Way
  */
 public class Register extends javax.swing.JFrame {
-    Connection conn=null;
-    ResultSet rs=null;
-    PreparedStatement pstmt=null;
+    Connection conn;
+    ResultSet rs;
+    PreparedStatement pstmt;
 
     /**
      * Creates new form Register
@@ -691,10 +691,10 @@ public  void insert(){
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
         try {
             // TODO add your handling code here:
-            pstmt = (PreparedStatement) conn.createStatement( rs.TYPE_SCROLL_INSENSITIVE, rs.CONCUR_UPDATABLE );
-           if(rs.next())
+          if(rs.next())
            {
-                sno.setText(rs.getString("staffNo"));
+               int staff = rs.getInt("StaffNo");
+                sno.setText(Integer.toString(staff));
                 sname.setText(rs.getString("Name"));
                 gender.setSelectedItem(rs.getString("Gender"));
                 dob.setDate(rs.getDate("DOB"));
